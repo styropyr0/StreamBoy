@@ -1,4 +1,6 @@
-# StreamBoy
+# StreamBoy - A Cost Free Alternative for Cloudflare Media Stream
+
+Utilizes Cloudflare's cost free egress to run video streams from your R2 storage.
 
 Stream private Cloudflare R2 media through a Worker with stable URLs and HTTP Range support (seekable video/audio).
 
