@@ -9,10 +9,6 @@ compatibility_date = "2025-08-01"
 # `wrangler secret put ...` in production.
 # ---------------------------------------------------------------------------
 [vars]
-# Canonical public URL used by your app when calling buildStreamUrl().
-# Leave empty to fall back to the request origin (useful on *.workers.dev).
-MEDIA_BASE_URL = "https://media.example.com"
-
 # Auth: none | bearer | query | hmac
 AUTH_MODE = "none"
 

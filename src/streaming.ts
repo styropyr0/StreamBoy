@@ -1,28 +1,6 @@
 import type { AppConfig, Env, SatisfiedByteRange } from "./types";
 
 /**
- * Map an R2 object key to the stable public streaming URL.
- * Database should store only the object key, never this URL.
- */
-export function buildStreamUrl(
-  objectKey: string,
-  baseUrl: string,
-): string {
-  const normalizedKey = objectKey.replace(/^\/+/, "");
-  const base = baseUrl.replace(/\/+$/, "");
-  return `${base}/${normalizedKey}`;
-}
-
-/**
- * Resolve the public base URL from config, falling back to the request origin
- * (works for both custom domains and *.workers.dev during development).
- */
-export function resolveMediaBaseUrl(request: Request, config: AppConfig): string {
-  if (config.mediaBaseUrl) return config.mediaBaseUrl;
-  return new URL(request.url).origin;
-}
-
-/**
  * Convert a request pathname into a safe R2 object key.
  * Rejects empty keys, path traversal, and encoded `..` segments.
  * Applies optional KEY_PREFIX from config.

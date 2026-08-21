@@ -20,7 +20,7 @@ npm run dev                      # http://127.0.0.1:8787
 npm run deploy
 ```
 
-Attach a custom domain (e.g. `media.example.com`) in the Worker dashboard and set `MEDIA_BASE_URL` to match.
+Optional: attach a custom domain in the Worker dashboard. Clients use that host (or `*.workers.dev`) when building media URLs in your **backend**.
 
 ## Configure
 
@@ -28,7 +28,6 @@ All behavior is controlled by env vars in `wrangler.toml` `[vars]` or secrets (`
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `MEDIA_BASE_URL` | request origin | Public base URL for your app |
 | `AUTH_MODE` | `none` | `none` \| `bearer` \| `query` \| `hmac` |
 | `AUTH_TOKEN` / `AUTH_TOKENS` | — | Shared token(s) for bearer/query (**secret**) |
 | `AUTH_HMAC_SECRET` | — | HMAC secret (**secret**) |
@@ -54,7 +53,7 @@ npx wrangler secret put AUTH_TOKEN          # bearer / query
 npx wrangler secret put AUTH_HMAC_SECRET    # hmac
 
 npm run sign-url -- \
-  --base https://media.example.com \
+  --base https://streamboy.example.workers.dev \
   --key videos/abc123.mp4 \
   --secret "$AUTH_HMAC_SECRET" \
   --ttl 3600
@@ -62,10 +61,12 @@ npm run sign-url -- \
 
 ## Use from your backend
 
+Set the Worker URL in your **API** env (not in this Worker), then:
+
 ```ts
 // DB stores: "videos/abc123.mp4"
 const url = `${process.env.MEDIA_BASE_URL}/videos/abc123.mp4`;
-// or: buildStreamUrl(key, baseUrl) from src/streaming.ts
+// e.g. https://streamboy.xxx.workers.dev/videos/abc123.mp4
 ```
 
 For `hmac`, append `exp` and `sig` (see `examples/sign-url.mjs`).

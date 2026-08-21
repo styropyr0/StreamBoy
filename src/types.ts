@@ -7,9 +7,6 @@ export interface Env {
   /** R2 bucket binding (configured in wrangler.toml, not a string env var). */
   MEDIA_BUCKET: R2Bucket;
 
-  /** Canonical public base URL, e.g. https://media.example.com */
-  MEDIA_BASE_URL?: string;
-
   /**
    * Auth mode: `none` | `bearer` | `query` | `hmac`
    * Default: none
@@ -104,7 +101,6 @@ export interface Env {
 export type AuthMode = "none" | "bearer" | "query" | "hmac";
 
 export interface AppConfig {
-  mediaBaseUrl: string | null;
   authMode: AuthMode;
   authTokens: Set<string>;
   authHmacSecret: string | null;

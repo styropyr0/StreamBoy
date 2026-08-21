@@ -2,15 +2,13 @@ import { authorizeRequest } from "./auth";
 import { isKeyAllowed, loadConfig } from "./config";
 import {
   applyCors,
-  buildStreamUrl,
   corsHeaders,
   handleMediaRequest,
   requestPathToObjectKey,
-  resolveMediaBaseUrl,
 } from "./streaming";
 import type { Env } from "./types";
 
-export { buildStreamUrl, resolveMediaBaseUrl, loadConfig };
+export { loadConfig };
 export { signMediaUrlParts, hmacPayload } from "./auth";
 export type { Env, AppConfig } from "./types";
 

@@ -72,7 +72,6 @@ export function loadConfig(env: Env): AppConfig {
   if (keyPrefix) keyPrefix = `${keyPrefix}/`;
 
   return {
-    mediaBaseUrl: env.MEDIA_BASE_URL?.trim().replace(/\/+$/, "") || null,
     authMode: parseAuthMode(env.AUTH_MODE),
     authTokens: collectTokens(env),
     authHmacSecret: env.AUTH_HMAC_SECRET?.trim() || null,
