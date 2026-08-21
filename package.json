@@ -1,0 +1,28 @@
+{
+  "name": "streamboy",
+  "version": "1.0.0",
+  "private": false,
+  "license": "MIT",
+  "description": "StreamBoy — open-source Cloudflare Worker that streams private R2 media with Range support, configured via environment variables",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "types": "wrangler types",
+    "check": "tsc --noEmit",
+    "sign-url": "node examples/sign-url.mjs"
+  },
+  "keywords": [
+    "streamboy",
+    "cloudflare",
+    "workers",
+    "r2",
+    "streaming",
+    "video",
+    "range-request"
+  ],
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260820.1",
+    "typescript": "^5.9.2",
+    "wrangler": "^4.28.1"
+  }
+}

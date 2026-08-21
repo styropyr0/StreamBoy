@@ -1,0 +1,13 @@
+# Copy to `.dev.vars` for local `wrangler dev`.
+# Never commit real secrets. In production use:
+#   npx wrangler secret put AUTH_TOKEN
+#   npx wrangler secret put AUTH_HMAC_SECRET
+
+# AUTH_MODE=bearer
+# AUTH_TOKEN=replace-me-with-a-long-random-string
+
+# Or multiple tokens:
+# AUTH_TOKENS=token-one,token-two
+
+# AUTH_MODE=hmac
+# AUTH_HMAC_SECRET=replace-me-with-a-long-random-string

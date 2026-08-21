@@ -1,0 +1,63 @@
+# Point bucket_name at your private R2 bucket.
+name = "streamboy"
+main = "src/index.ts"
+compatibility_date = "2025-08-01"
+
+# ---------------------------------------------------------------------------
+# Configuration (all optional unless noted)
+# Non-secret defaults live here. Put secrets in `.dev.vars` locally and
+# `wrangler secret put ...` in production.
+# ---------------------------------------------------------------------------
+[vars]
+# Canonical public URL used by your app when calling buildStreamUrl().
+# Leave empty to fall back to the request origin (useful on *.workers.dev).
+MEDIA_BASE_URL = "https://media.example.com"
+
+# Auth: none | bearer | query | hmac
+AUTH_MODE = "none"
+
+# Query / HMAC param names (only needed for those modes)
+# AUTH_TOKEN_QUERY_PARAM = "token"
+# AUTH_HMAC_EXP_PARAM = "exp"
+# AUTH_HMAC_SIG_PARAM = "sig"
+# AUTH_HMAC_MAX_TTL_SECONDS = "86400"
+# AUTH_HEADER_NAME = "Authorization"
+
+# CORS — use "*" or a comma-separated allowlist
+CORS_ORIGINS = "*"
+CORS_ALLOW_CREDENTIALS = "false"
+# CORS_ALLOW_HEADERS = "Range, Authorization, ..."
+# CORS_EXPOSE_HEADERS = "Accept-Ranges, Content-Range, Content-Length, ETag"
+# CORS_ALLOW_METHODS = "GET, HEAD, OPTIONS"
+# CORS_MAX_AGE = "86400"
+
+# Caching for objects that do not already set Cache-Control in R2 metadata
+CACHE_CONTROL = "public, max-age=31536000, immutable"
+CACHE_CONTROL_OVERRIDE = "false"
+
+# Optional key guards (comma-separated). Empty ALLOWED_PREFIXES = allow all.
+# ALLOWED_PREFIXES = "videos/,images/,audio/"
+# DENIED_PREFIXES = "private/,tmp/"
+# KEY_PREFIX = ""
+
+# Features
+ENABLE_HEALTHCHECK = "true"
+# HEALTHCHECK_PATHS = "/health,/healthz"
+ENABLE_RANGE = "true"
+
+# Response bodies
+# NOT_FOUND_BODY = "Not Found"
+# FORBIDDEN_BODY = "Forbidden"
+
+# ---------------------------------------------------------------------------
+# R2 binding — keep the bucket PRIVATE. This Worker is the access layer.
+# ---------------------------------------------------------------------------
+[[r2_buckets]]
+binding = "MEDIA_BUCKET"
+bucket_name = "your-media-bucket"
+preview_bucket_name = "your-media-bucket-preview"
+
+# Optional custom domain route:
+# routes = [
+#   { pattern = "media.example.com/*", zone_name = "example.com" }
+# ]
